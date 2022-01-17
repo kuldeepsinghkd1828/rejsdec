@@ -6,10 +6,11 @@ function Login() {
     const [password, setPassword] = useState('');
     const navigator = useNavigate();
     const loginHandler = function (e) {
-        const user = database.findIndex(user => user.email == email && user.password == password)
-        if (user !== -1) {
+        const user = database.find(user => user.email == email && user.password == password)
+        if (user !== undefined) {
+            console.log(user);
             window.alert('login Success');
-            navigator('/dashboard');
+            navigator('/dashboard', { state: { "name": user.name } });
         } else {
             window.alert('Login Invalid');
         }
