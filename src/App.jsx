@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Signup from './components/Signup';
 import Page404 from './components/Page404';
+import Delete from './components/Delete';
 import Todo from './components/Todo';
 function App() {
     return <>
@@ -18,6 +19,8 @@ function App() {
                     <Route path='/services' element={<h1>Services Page</h1>} />
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/todo' element={<Todo />} />
+                    <Route path='/complete' element={<h1>Complete Pageƒ</h1>} />
+                    <Route path='/delete' element={<Delete />} />
                     <Route path='*' element={<Page404 />} />
                 </Routes>
             </Router>

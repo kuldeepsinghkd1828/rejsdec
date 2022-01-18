@@ -1,4 +1,10 @@
+import { Link, useNavigate } from "react-router-dom";
+
 function TodoList({ list }) {
+    const navigate = useNavigate()
+    if (list.length == 0) {
+        return <h4 className="text-center">List is Empty</h4>
+    }
     return <>
         <div className="container text-secondary row py-5 px-5">
             {list.map((todo, index) => {
@@ -6,8 +12,8 @@ function TodoList({ list }) {
                     <div className="card-body">
                         <h5 className="card-title">TODO No. {index + 1}</h5>
                         <p className="card-text">{todo}</p>
-                        <a href="#" className="card-link">Card link</a>
-                        <a href="#" className="card-link">Another link</a>
+                        <button onClick={() => navigate('/complete')} className="btn btn-success">Complete</button>
+                        <button onClick={() => navigate('/delete', { state: { index } })} className="btn btn-danger">Delete</button>
                     </div>
                 </div>
             })}
