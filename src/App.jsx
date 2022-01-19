@@ -6,6 +6,7 @@ import Signup from './components/Signup';
 import Page404 from './components/Page404';
 import Delete from './components/Delete';
 import Todo from './components/Todo';
+import Complete from './components/Complete';
 function App() {
     return <>
         <div className="bg-dark text-white mt-3" style={{ height: '100vh' }}>
@@ -19,7 +20,7 @@ function App() {
                     <Route path='/services' element={<h1>Services Page</h1>} />
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/todo' element={<Todo />} />
-                    <Route path='/complete' element={<h1>Complete Pageƒ</h1>} />
+                    <Route path='/complete' element={<Complete />} />
                     <Route path='/delete' element={<Delete />} />
                     <Route path='*' element={<Page404 />} />
                 </Routes>

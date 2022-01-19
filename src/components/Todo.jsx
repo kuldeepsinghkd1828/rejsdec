@@ -1,19 +1,42 @@
 import { useState } from 'react';
 import TodoList from './TodoList';
+let todos = localStorage.getItem('list');
 function Todo() {
-    let todos = localStorage.getItem('list');
     if (todos == null) {
         localStorage.setItem('list', JSON.stringify([]));
         todos = JSON.parse(localStorage.getItem('list'));
-    } else
+    } else {
         todos = JSON.parse(localStorage.getItem('list'));
+    }
+    
     const [todo, setTodo] = useState('');
     const [list, setList] = useState(todos);
+    const [index, setIndex] = useState(-1);
+
     const addHandler = function () {
-        todos.push(todo);
-        setList([todo, ...list])
+        if (index < 0) {
+            let todoItem = { todo, date: new Date().toLocaleDateString(), status: 'pending' }
+            todos.push(todoItem);
+            setList(todos)
+            setTodo('') // to empty the input for todo
+            localStorage.setItem('list', JSON.stringify(todos));
+        } else {
+            updateHandler();
+        }
+    }
+    const updateHandler = function () {
+        list[index].todo = todo;
+        // console.log(list);
+        setList([...list])
         setTodo('') // to empty the input for todo
-        localStorage.setItem('list', JSON.stringify(todos));
+        localStorage.setItem('list', JSON.stringify(list));
+    }
+
+    const editHandler = function (e) {
+        let index = parseInt(e.target.dataset.index);
+        setIndex(index);
+        let editTodo = list[index];
+        setTodo(editTodo.todo)
     }
     return <>
         <div className="input-group mb-3 mt-5 px-5">
@@ -34,7 +57,7 @@ function Todo() {
                 Add Todo
             </button>
         </div>
-        <TodoList list={list} />
+        <TodoList list={list} editHandler={editHandler} />
     </>
 }
 export default Todo;
